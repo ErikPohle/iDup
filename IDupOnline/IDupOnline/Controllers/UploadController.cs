@@ -30,17 +30,25 @@ namespace IDupOnline.Controllers
             long size = files.Sum(f => f.Length);
             var filePaths = new List<string>();
 
-            foreach(var formFile in files)
+            foreach(IFormFile formFile in files)
             {
-                if(formFile.Length > 0)
-                {
-                    var filePath = Path.GetTempFileName();
-                    filePaths.Add(filePath);
+                if (formFile.ContentType.Equals("image/jpeg") || formFile.ContentType.Equals("image/png") || formFile.ContentType.Equals("image/jpg")) {
 
-                    using (var stream = new FileStream(filePath, FileMode.Create))
+
+                    if (formFile.Length > 0)
                     {
-                        await formFile.CopyToAsync(stream);
+                        var filePath = Path.GetTempFileName();
+                        filePaths.Add(filePath);
+
+                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await formFile.CopyToAsync(stream);
+                        }
                     }
+                }
+                else
+                {
+                    return BadRequest(new { error = "Only images with file extensions equal to .jpg, .png, or .jpeg are accepted." });
                 }
             }
 
