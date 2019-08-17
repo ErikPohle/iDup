@@ -1,7 +1,16 @@
-﻿@{
+﻿@model IDupOnline.Models.ImageDuplicate
+
+@{
     ViewData["Title"] = "Home Page";
+}
+
+@using (Html.BeginForm("Index", "Upload", FormMethod.Post, new {  enctype = "multipart/form-data"   }))
+{
+    <input type="file" name="files" multiple />
+    <input type="submit" value="Upload" />
 }
 
 <br />
 
 <div> We can setup the framework and UI here with the power of Razer Pages! </div>
+
