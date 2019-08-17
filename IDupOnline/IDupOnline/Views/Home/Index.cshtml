@@ -1,8 +1,10 @@
-﻿@model IDupOnline.Models.ImageDuplicate
+﻿@model IDupOnline.Models.ValidationPage
 
 @{
     ViewData["Title"] = "Home Page";
 }
+
+<br />
 
 @using (Html.BeginForm("Index", "Upload", FormMethod.Post, new {  enctype = "multipart/form-data"   }))
 {
@@ -12,5 +14,5 @@
 
 <br />
 
-<div> We can setup the framework and UI here with the power of Razer Pages! </div>
+<div> We can setup the framework and UI here with the power of Razor Pages! </div>
 
